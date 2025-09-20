@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lot Size Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      transition: background-image 0.5s ease-in-out;
+    }
+
+    /* Blur effect layer */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: inherit;
+      filter: blur(4px);
+      z-index: -1;
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0px 4px 20px rgba(255, 0, 0, 0.6);
+      max-width: 400px;
+      width: 100%;
+      color: #fff;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #ff4444;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+      color: #ffcccc;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #ff4444;
+      font-size: 14px;
+      background: #111;
+      color: #fff;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background: #ff0000;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #cc0000;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 8px;
+      background: #222;
+      border: 1px solid #ff4444;
+      text-align: center;
+      font-size: 16px;
+      color: #fff;
+    }
+
+    .theme-switcher {
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .theme-switcher button {
+      margin: 5px;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background: #333;
+      color: #fff;
+      transition: 0.3s;
+    }
+
+    .theme-switcher button:hover {
+      background: #ff4444;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Lot Size Calculator</h2>
+
+    <label for="pair">Currency Pair:</label>
+    <select id="pair">
+      <option value="EURUSD">EURUSD</option>
+      <option value="GBPUSD">GBPUSD</option>
+      <option value="USDJPY">USDJPY</option>
+      <option value="AUDUSD">AUDUSD</option>
+      <option value="USDCHF">USDCHF</option>
+      <option value="XAUUSD">XAUUSD (Gold)</option>
+    </select>
+
+    <label for="accountSize">Account Size ($):</label>
+    <input type="number" id="accountSize" placeholder="Enter account balance">
+
+    <label for="risk">Risk Percentage (%):</label>
+    <input type="number" id="risk" placeholder="Enter % risk">
+
+    <label for="stopLoss">Stop Loss (pips):</label>
+    <input type="number" id="stopLoss" placeholder="Enter stop loss in pips">
+
+    <button onclick="calculateLot()">Calculate</button>
+
+    <div class="result" id="result">Result will appear here</div>
+
+    <div class="theme-switcher">
+      <p>Change Background:</p>
+      <button onclick="setTheme('wall1')">Theme 1</button>
+      <button onclick="setTheme('wall2')">Theme 2</button>
+    </div>
+  </div>
+
+<script>
+  // Background themes
+  const themes = {
+    wall1: "https://cdn.wallpapersafari.com/1/19/K4Z0t2.jpg",
+    wall2: "https://m.media-amazon.com/images/I/814C8cWkSML._UF1000,1000_QL80_.jpg"
+  };
+
+  // Default background
+  document.body.style.backgroundImage = `url('${themes.wall1}')`;
+
+  function setTheme(theme) {
+    document.body.style.backgroundImage = `url('${themes[theme]}')`;
+  }
+
+  function calculateLot() {
+    let accountSize = parseFloat(document.getElementById("accountSize").value);
+    let riskPercent = parseFloat(document.getElementById("risk").value);
+    let stopLoss = parseFloat(document.getElementById("stopLoss").value);
+
+    if (isNaN(accountSize) || isNaN(riskPercent) || isNaN(stopLoss) || stopLoss === 0) {
+      document.getElementById("result").innerText = "⚠ Please fill all fields correctly.";
+      return;
+    }
+
+    let riskAmount = accountSize * (riskPercent / 100);
+    let pipValue = 10; // for standard lot
+    let lotSize = riskAmount / (stopLoss * pipValue);
+
+    document.getElementById("result").innerHTML =
+      `<b>Lot Size:</b> ${lotSize.toFixed(2)} lots<br>
+       <b>Risk Amount:</b> $${riskAmount.toFixed(2)}`;
+  }
+</script>
+
+</body>
+</html>
