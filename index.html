@@ -1,186 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lot Size Calculator</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Raman's Portfolio</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-size: cover;
-      background-position: center;
-      position: relative;
-      transition: background-image 0.5s ease-in-out;
-    }
-
-    /* Blur effect layer */
-    body::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: inherit;
-      filter: blur(4px);
-      z-index: -1;
-    }
-
-    .container {
-      background: rgba(0, 0, 0, 0.8);
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0px 4px 20px rgba(255, 0, 0, 0.6);
-      max-width: 400px;
-      width: 100%;
-      color: #fff;
-    }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #ff4444;
-    }
-
-    label {
-      font-weight: bold;
-      display: block;
-      margin-top: 10px;
-      color: #ffcccc;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border-radius: 6px;
-      border: 1px solid #ff4444;
-      font-size: 14px;
-      background: #111;
-      color: #fff;
-    }
-
-    button {
-      margin-top: 20px;
-      width: 100%;
-      padding: 12px;
-      background: #ff0000;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    button:hover {
-      background: #cc0000;
-    }
-
-    .result {
-      margin-top: 20px;
-      padding: 15px;
-      border-radius: 8px;
-      background: #222;
-      border: 1px solid #ff4444;
-      text-align: center;
-      font-size: 16px;
-      color: #fff;
-    }
-
-    .theme-switcher {
-      margin-top: 15px;
-      text-align: center;
-    }
-
-    .theme-switcher button {
-      margin: 5px;
-      padding: 8px 15px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      background: #333;
-      color: #fff;
-      transition: 0.3s;
-    }
-
-    .theme-switcher button:hover {
-      background: #ff4444;
-    }
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background:#f5f5f5; }
+    header { background:#222; color:#fff; padding:20px; text-align:center; }
+    .section { padding:20px; max-width:800px; margin:auto; background:#fff; margin-top:20px; border-radius:10px; }
+    h2 { margin-top:0; }
+    ul { line-height:1.7; }
   </style>
 </head>
 <body>
+  <header>
+    <h1>Raman's Portfolio</h1>
+    <p>Data Entry • Excel Work • Beginner Python Projects</p>
+  </header>
 
-  <div class="container">
-    <h2>Lot Size Calculator</h2>
-
-    <label for="pair">Currency Pair:</label>
-    <select id="pair">
-      <option value="EURUSD">EURUSD</option>
-      <option value="GBPUSD">GBPUSD</option>
-      <option value="USDJPY">USDJPY</option>
-      <option value="AUDUSD">AUDUSD</option>
-      <option value="USDCHF">USDCHF</option>
-      <option value="XAUUSD">XAUUSD (Gold)</option>
-    </select>
-
-    <label for="accountSize">Account Size ($):</label>
-    <input type="number" id="accountSize" placeholder="Enter account balance">
-
-    <label for="risk">Risk Percentage (%):</label>
-    <input type="number" id="risk" placeholder="Enter % risk">
-
-    <label for="stopLoss">Stop Loss (pips):</label>
-    <input type="number" id="stopLoss" placeholder="Enter stop loss in pips">
-
-    <button onclick="calculateLot()">Calculate</button>
-
-    <div class="result" id="result">Result will appear here</div>
-
-    <div class="theme-switcher">
-      <p>Change Background:</p>
-      <button onclick="setTheme('wall1')">Theme 1</button>
-      <button onclick="setTheme('wall2')">Theme 2</button>
-    </div>
+  <div class="section">
+    <h2>About Me</h2>
+    <p>Hello! My name is Raman. I am a beginner learning data entry, Excel, and basic projects like OCR. I am hardworking, quick to learn, and looking for remote opportunities.</p>
   </div>
 
-<script>
-  // Background themes
-  const themes = {
-    wall1: "https://cdn.wallpapersafari.com/1/19/K4Z0t2.jpg",
-    wall2: "https://m.media-amazon.com/images/I/814C8cWkSML._UF1000,1000_QL80_.jpg"
-  };
+  <div class="section">
+    <h2>Skills</h2>
+    <ul>
+      <li>Excel (Data Entry, Tables, Lists)</li>
+      <li>Google Sheets</li>
+      <li>Typing & Accuracy</li>
+      <li>Basic Python Projects</li>
+    </ul>
+  </div>
 
-  // Default background
-  document.body.style.backgroundImage = `url('${themes.wall1}')`;
+  <div class="section">
+    <h2>Projects</h2>
+    <h3>Optical Character Recognition (OCR) Tool</h3>
+    <p>Built a simple Python-based OCR tool that extracts text from images using Tesseract. Learned preprocessing, automation, and data extraction.</p>
+  </div>
 
-  function setTheme(theme) {
-    document.body.style.backgroundImage = `url('${themes[theme]}')`;
-  }
+  <div class="section">
+    <h2>Sample Work</h2>
+    <p>Excel Work File: <a href="https://www.dropbox.com/scl/fi/770x13al3cmp9jnrhi1bp/Sample_MultiSheet.xlsx?rlkey=ocdavuoizdggehi7ia097szth&st=bznl8w28&dl=0">Download Here</a></p>
+  </div>
 
-  function calculateLot() {
-    let accountSize = parseFloat(document.getElementById("accountSize").value);
-    let riskPercent = parseFloat(document.getElementById("risk").value);
-    let stopLoss = parseFloat(document.getElementById("stopLoss").value);
-
-    if (isNaN(accountSize) || isNaN(riskPercent) || isNaN(stopLoss) || stopLoss === 0) {
-      document.getElementById("result").innerText = "⚠ Please fill all fields correctly.";
-      return;
-    }
-
-    let riskAmount = accountSize * (riskPercent / 100);
-    let pipValue = 10; // for standard lot
-    let lotSize = riskAmount / (stopLoss * pipValue);
-
-    document.getElementById("result").innerHTML =
-      `<b>Lot Size:</b> ${lotSize.toFixed(2)} lots<br>
-       <b>Risk Amount:</b> $${riskAmount.toFixed(2)}`;
-  }
-</script>
-
+  <div class="section" style="margin-bottom:40px;">
+    <h2>Contact</h2>
+    <p>Email: ramanptp2008@gmail.com</p>
+  </div>
 </body>
 </html>
